@@ -1,0 +1,42 @@
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.5/typed.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <style>
+        .tag {
+            color: #ff3c41;
+        }
+
+        .inner {
+            margin-left: 1rem;
+        }
+    </style>
+    <script>
+        $("p").html($("p").html().trim().replace(/\n/g, "<br>"));
+
+        var options = {
+            stringsElement: "#typed-strings",
+            loop: true,
+            typeSpeed: 70,
+            backDelay: 2000,
+        };
+
+        var typed = new Typed("#typed", options);
+    </script>
+</head>
+
+<body>
+    <div id="typed-strings">
+        <p>
+            &lt<span class="tag">html</span>&gt
+            <span class="inner">&lt<span class="tag">h1</span>&gt Hello World! &lt/<span class="tag">h1</span>&gt</span>
+            <span class="inner">&lt<span class="tag">h1</span>&gt This is a HTML, CSS, and JS animation. &lt/<span class="tag">h1</span>&gt</span>
+            <span class="inner">&lt<span class="tag">h1</span>&gt Embedded in an SVG for your enjoyment! &lt/<span class="tag">h1</span>&gt</span>
+            <span class="inner">&lt<span class="tag">h1</span>&gt Thanks for visiting :) &lt/<span class="tag">h1</span>&gt</span>
+            &lt/<span class="tag">html</span>&gt
+        </p>
+    </div>
+    
+    <span id="typed"></span>
+</body>
+
