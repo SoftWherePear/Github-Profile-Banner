@@ -39,4 +39,746 @@
     
     <span id="typed"></span>
 </body>
+<!-- -------------- HTML --------------------------------------------------------------- -->
+<!-- <svg fill="none" viewBox="0 0 100vw 200" width="100vw" height="200" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="100%" height="100%">
+    <div id="html" xmlns="http://www.w3.org/1999/xhtml">
+      <div class="background">
+        <ul class="b-text">
+          <li>
+            <p style="--chars: 6; --time: 3s">&lt<span class="tag">html</span>&gt</p>
+          </li>
+          <li>
+            <p class="inner" style="--chars:23; --time: 12s">&lt<span class="tag">h1</span>&gt Hello World! &lt/<span class="tag">h1</span>&gt</p>
+          </li>
+          <li>
+            <p class="inner" style="--chars:49">&lt<span class="tag">h1</span>&gt This is a pure HTML and CSS animation. &lt/<span class="tag">h1</span>&gt</p>
+          </li>
+          <li>
+            <p class="inner" style="--chars:31">&lt<span class="tag">h1</span>&gt Thanks for visiting! &lt/<span class="tag">h1</span>&gt</p>
+          </li>
+          <li>
+            <p style="--chars:7">&lt/<span class="tag">html</span>&gt</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </foreignObject>
+</svg> -->
 
+<!-- <svg fill="none" viewBox="0 0 100vw 200" width="100vw" height="200" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="100%" height="100%">
+    <div id="html" xmlns="http://www.w3.org/1999/xhtml">
+      <style>
+        .var-highlight {
+          color: #C0AD60;
+        }
+
+        .string-highlight {
+          color: rgba(253, 149, 90, 0.8);
+        }
+
+        #typewriter {
+          font-size: 2em;
+          margin: 0;
+          font-family: "Courier New";
+
+          &:after {
+            content: "|";
+            animation: blink 500ms linear infinite alternate;
+          }
+        }
+
+        @keyframes blink {
+          0% {
+            opacity: 0;
+          }
+
+          100% {
+            opacity: 1;
+          }
+        }
+      </style>
+      <pre id="typewriter">
+<span class="var-highlight">var</span> object = {
+    name: <span class="string-highlight">'Foo'</span>,
+    type: <span class="string-highlight">'Bar'</span>,
+    location: <span class="string-highlight">'Earth'</span>,
+    properties:[<span class="string-highlight">'Javascript'</span>,
+                <span class="string-highlight">'HTML'</span>,
+                <span class="string-highlight">'CSS'</span>];
+}; </pre>
+      <script>
+        // <![CDATA[
+        function setupTypewriter(t) {
+          var HTML = t.innerHTML;
+          t.innerHTML = "";
+          var cursorPosition = 0,
+            tag = "",
+            writingTag = false,
+            tagOpen = false,
+            typeSpeed = 100,
+            tempTypeSpeed = 0;
+          var type = function() {
+            if (writingTag === true) {
+              tag += HTML[cursorPosition];
+            }
+            if (HTML[cursorPosition] === "<") {
+              tempTypeSpeed = 0;
+              if (tagOpen) {
+                tagOpen = false;
+                writingTag = true;
+              } else {
+                tag = "";
+                tagOpen = true;
+                writingTag = true;
+                tag += HTML[cursorPosition];
+              }
+            }
+            if (!writingTag && tagOpen) {
+              tag.innerHTML += HTML[cursorPosition];
+            }
+            if (!writingTag && !tagOpen) {
+              if (HTML[cursorPosition] === " ") {
+                tempTypeSpeed = 0;
+              } else {
+                tempTypeSpeed = (Math.random() * typeSpeed) + 50;
+              }
+            }
+            if (writingTag === true && HTML[cursorPosition] === ">") {
+              tempTypeSpeed = (Math.random() * typeSpeed) + 50;
+              writingTag = false;
+              if (tagOpen) {
+                var newSpan = document.createElement("span");
+              t.innerHTML += HTML[cursorPosition];
+                t.appendChild(newSpan);
+                newSpan.innerHTML = tag;
+                tag = newSpan.firstChild;
+              }
+            }
+            cursorPosition += 1;
+            if (cursorPosition < HTML.length - 1) {
+              setTimeout(type, tempTypeSpeed);
+            }
+          };
+          return {
+            type: type
+          };
+        }
+        var typer = document.getElementById('typewriter');
+        typewriter = setupTypewriter(typewriter);
+        typewriter.type();
+        // ]]>
+      </script>
+    </div>
+
+  </foreignObject>
+
+</svg> -->
+
+<!-- <svg fill="none" viewBox="0 0 100vw 300" width="100vw" height="300" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="100%" height="100%">
+    <div id="html" xmlns="http://www.w3.org/1999/xhtml">
+      <style>
+        #html {
+          margin: 0;
+          height: 100%;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #222;
+        }
+
+        .text-animation {
+          display: none;
+          position: relative;
+          color: #f5f5f5;
+          font-size: 16px;
+          font-family: "Passion One", sans-serif;
+          letter-spacing: 1px;
+          line-height: 1;
+        }
+
+        .text-animation .letter {
+          display: inline-block;
+          opacity: 0;
+        }
+
+        .cursor {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 3px;
+          background: #f5f5f5;
+          z-index: 1;
+        }
+        .var-highlight {
+          color: #C0AD60;
+        }
+
+        .string-highlight {
+          color: rgba(253, 149, 90, 0.8);
+        }
+      </style>
+      <pre id="typewriter" class="text-animation">
+<span class="var-highlight">var</span> object = {
+    name: <span class="string-highlight">'Foo'</span>,
+    type: <span class="string-highlight">'Bar'</span>,
+    location: <span class="string-highlight">'Earth'</span>,
+    properties:[<span class="string-highlight">'Javascript'</span>,
+                <span class="string-highlight">'HTML'</span>,
+                <span class="string-highlight">'CSS'</span>];
+}; </pre>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+      <script>
+        const element = document.querySelector(".text-animation");
+        const lettersHtml = element.textContent.replace(
+          /\S/g,
+          '<span class="letter">$&</span>'
+        );
+        element.innerHTML = `<div class="letters">${lettersHtml}</div><span class="cursor"></span>`;
+        element.style.display = "block";
+        const letters = Array.from(element.querySelectorAll(".letter"));
+        const TYPE_AFTER_MS = 3_000;
+        const JUMP_AFTER_MS = 250;
+        const blink = anime({
+          targets: ".text-animation .cursor",
+          loop: true,
+          duration: 750,
+          opacity: [{
+            value: [1, 1]
+          }, {
+            value: [0, 0]
+          }]
+        });
+        anime
+          .timeline({
+            loop: true
+          })
+          .add({
+              targets: ".text-animation .cursor",
+              translateX: letters.map((letter, i) => ({
+                value: letter.offsetLeft + letter.offsetWidth,
+                duration: 1,
+                delay: i === 0 ? 0 : JUMP_AFTER_MS
+              }))
+            },
+            TYPE_AFTER_MS
+          )
+          .add({
+              targets: ".text-animation .letter",
+              opacity: [0, 1],
+              duration: 1,
+              delay: anime.stagger(JUMP_AFTER_MS),
+              changeBegin: () => {
+                blink.reset();
+                blink.pause();
+              },
+              changeComplete: () => {
+                blink.restart();
+              }
+            },
+            TYPE_AFTER_MS
+          )
+          .add({
+            targets: ".text-animation",
+            opacity: 0,
+            duration: 1000,
+            delay: 500,
+            easing: "easeOutExpo"
+          });
+      </script>
+    </div>
+  </foreignObject>
+</svg> -->
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+<div class="text-animation">
+  Welcome to codingflag
+</div> -->
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<div class="background-typer">
+  <p class="text">
+    &lt<span class="tag">html</span>&gt
+  </p>
+  <p class="text inner">
+    &lt<span class="tag">h1</span>&gt Hello World! &lt/<span class="tag">h1</span>&gt
+  </p>
+  <p class="text inner">
+    &lt<span class="tag">h1</span>&gt This is a HTML, CSS, and JS animation. &lt/<span class="tag">h1</span>&gt
+  </p>
+  <p class="text inner">
+    &lt<span class="tag">h1</span>&gt Embedded in an SVG for your enjoyment! &lt/<span class="tag">h1</span>&gt
+  </p>
+  <p class="text inner">
+    &lt<span class="tag">h1</span>&gt Thanks for visiting :) &lt/<span class="tag">h1</span>&gt
+  </p>
+  <p class="text">
+    &lt/<span class="tag">html</span>&gt
+  </p>
+</div> -->
+
+<!-- 
+<div class="background-typer">
+  <div class="line">
+    <div class="cursor"></div>
+    <p class="text">
+      &lt<span class="tag">html</span>&gt
+    </p>
+  </div>
+  <br>
+  <div class="line">
+    <div class="cursor"></div>
+    <p class="text inner">
+          &lt<span class="tag">h1</span>&gt Hello World! &lt/<span class="tag">h1</span>&gt
+    </p>
+  </div>
+  <br>
+  <div class="line">
+    <div class="cursor"></div>
+    <p class="text inner">
+      &lt<span class="tag">h1</span>&gt This is a HTML, CSS, and JS animation. &lt/<span class="tag">h1</span>&gt
+    </p>
+  </div>
+  <br>
+  <div class="line">
+    <div class="cursor"></div>
+    <p class="text inner">
+      &lt<span class="tag">h1</span>&gt Embedded in an SVG for your enjoyment! &lt/<span class="tag">h1</span>&gt
+    </p>
+  </div>
+  <br>
+  <div class="line">
+    <div class="cursor"></div>
+    <p class="text inner">
+      &lt<span class="tag">h1</span>&gt Thanks for visiting :) &lt/<span class="tag">h1</span>&gt
+    </p>
+  </div>
+  <br>
+  <div class="line">
+    <div class="cursor"></div>
+    <p class="text">
+      &lt/<span class="tag">html</span>&gt
+    </p>
+  </div>
+</div> 
+-->
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<div class="container">
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  <br><br>
+  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+  laboris nisi ut aliquip ex ea commodo consequat.
+  <br><br>
+  Duis aute irure dolor in reprehenderit in voluptate velit
+  esse cillum dolore eu fugiat nulla pariatur.
+</div>
+ 
+<p class="ex2">Hello <a href="https://johnresig.com/">John</a>, how are you doing?</p>
+
+<div class="background-typer">
+  <p class="text">
+    &lt<span class="tag">html</span>&gt
+  </p>
+  <p class="text inner">
+    &lt<span class="tag">h1</span>&gt Hello World! &lt/<span class="tag">h1</span>&gt
+  </p>
+  <p class="text inner">
+    &lt<span class="tag">h1</span>&gt This is a HTML, CSS, and JS animation. &lt/<span class="tag">h1</span>&gt
+  </p>
+  <p class="text inner">
+    &lt<span class="tag">h1</span>&gt Embedded in an SVG for your enjoyment! &lt/<span class="tag">h1</span>&gt
+  </p>
+  <p class="text inner">
+    &lt<span class="tag">h1</span>&gt Thanks for visiting :) &lt/<span class="tag">h1</span>&gt
+  </p>
+  <p class="text">
+    &lt/<span class="tag">html</span>&gt
+  </p>
+</div>
+
+<div id="output"></div> -->
+
+<!-- -------------- CSS ---------------------------------------------------------------- -->
+<!-- * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #fff;
+  }
+  
+  #html {
+    height: 100%;
+    width: 100%;
+    background: #0D1117;
+  }
+  
+  .background {
+  /*   z-index: 0; *
+    display: flex;
+  }
+  
+  p {
+    display: inline-block;
+    position: relative;
+  }
+  
+  p.inner {
+      margin-left: 5%;
+  }
+  
+  
+  .b-text li p::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #0D1117;
+    border-left: 2px solid #fff;
+    animation: typing var(--time) steps(var(--chars)) infinite;
+  }
+  
+  @keyframes typing {
+    40%, 60% {
+      left: calc(100% + 0.4em);
+    }
+    100% {
+      left: 0;
+    }
+  }*/
+  
+  /* body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #222;
+  }
+  
+  .text-animation {
+    display: none;
+    position: relative;
+    color: #f5f5f5;
+    font-size: 50px;
+    font-family: "Passion One", sans-serif;
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  
+  .text-animation .letter {
+    display: inline-block;
+    opacity: 0;
+  }
+  
+  .cursor {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #f5f5f5;
+    z-index: 1;
+  } */ -->
+
+<!-- -------------- JAVASCRIPT --------------------------------------------------------- -->
+
+  <!-- // const element = document.querySelector(".text-animation");
+// const lettersHtml = element.textContent.replace(
+//   /\S/g,
+//   '<span class="letter">$&</span>'
+// );
+// element.innerHTML = `<div class="letters">${lettersHtml}</div><span class="cursor"></span>`;
+// element.style.display = "block";
+
+// const letters = Array.from(element.querySelectorAll(".letter"));
+// const TYPE_AFTER_MS = 3_000;
+// const JUMP_AFTER_MS = 250;
+
+// const blink = anime({
+//   targets: ".text-animation .cursor",
+//   loop: true,
+//   duration: 750,
+//   opacity: [{ value: [1, 1] }, { value: [0, 0] }]
+// });
+
+// anime
+//   .timeline({ loop: true })
+//   .add(
+//     {
+//       targets: ".text-animation .cursor",
+//       translateX: letters.map((letter, i) => ({
+//         value: letter.offsetLeft + letter.offsetWidth,
+//         duration: 1,
+//         delay: i === 0 ? 0 : JUMP_AFTER_MS
+//       }))
+//     },
+//     TYPE_AFTER_MS
+//   )
+//   .add(
+//     {
+//       targets: ".text-animation .letter",
+//       opacity: [0, 1],
+//       duration: 1,
+//       delay: anime.stagger(JUMP_AFTER_MS),
+//       changeBegin: () => {
+//         blink.reset();
+//         blink.pause();
+//       },
+//       changeComplete: () => {
+//         blink.restart();
+//       }
+//     },
+//     TYPE_AFTER_MS
+//   )
+//   .add({
+//     targets: ".text-animation",
+//     opacity: 0,
+//     duration: 1000,
+//     delay: 500,
+//     easing: "easeOutExpo"
+//   });
+
+const hideColor = '#FFF';
+const showColor = '#000';
+// var textWrapper = document.querySelector('.background-typer');
+// textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+// console.log(textWrapper.innerHTML);
+
+// $(".text").wrap("<div class='line'></div>");
+// $(".text").before("<div class='cursor'></div>");
+// $(".line").after("<br>");
+// console.log(document.querySelector(".background-typer"));
+
+//  let animation = anime.timeline({
+//       duration: 15000,
+//       // complete: function() { animation.restart(); }
+//     });
+
+// animation
+// .add({
+//   targets: '.cursor',
+//   translateX: {value: 2, endDelay: 400},
+//   borderColor: [
+//     { value: showColor, duration: 100, endDelay: 100 },
+//     { value: hideColor, duration: 100, endDelay: 100 },
+//     { value: showColor, duration: 100, endDelay: 100 },
+//     { value: hideColor, duration: 100, endDelay: 100 },
+//     { value: showColor, duration: 100, endDelay: 100 },
+//     { value: hideColor, duration: 100, endDelay: 100 },
+//     { value: showColor, duration: 100, endDelay: 100 }
+//   ],
+//   // translateX: 380,
+//   delay: anime.stagger(6000),
+// },
+     
+//     );
+
+// $(document).ready(function() {
+//     $('p').each(function(i) {
+//         var iTotalChars = $(this).text().trim().length;
+//         $(this).append("<b> " + iTotalChars + " characters</b>");
+//     });
+// })
+
+// var test = document.querySelector('.text').innerText;
+
+// test.each(  function () {
+//   console.log(test);
+//   }
+// )
+// console.log(test);
+
+// var test2 = document.querySelectorAll(".text")
+// test2.forEach((line) => {
+//     console.log(line.innerText);
+//   console.log(line.innerText.length);
+// });
+
+// const count = test2.length;
+// for (let i = 0; i < count; i++) {
+//   console.log(test2[i].innerHTML);
+//   console.log(test2[i].innerText);
+//   console.log(test2[i].innerText.length);
+// }
+
+// $(".container")
+//   .contents()
+//   .filter(function () {
+//     return this.nodeType === 3;
+//   })
+//   .wrap("<p></p>")
+//   .end()
+//   .filter("br")
+//   .remove();
+
+// console.log(document.querySelector(".container"));
+
+// $(".ex2")
+//   .contents()
+//   .filter(function () {
+//     return this.nodeType !== 1;
+//   })
+//   .wrap("<b></b>");
+
+// console.log(document.querySelector(".ex2"));
+
+// var stack_counter = 0;
+// var outEl = document.getElementById("output");
+// var str = "";
+// function traverse(el) {
+//   str += el.nodeName + " " + el.textContent + " " + stack_counter + "<br>";
+//   stack_counter += 1;
+//   for (var i = 0; i < el.children.length; i++) {
+//     traverse(el.children[i]);
+//   }
+// }
+
+// traverse(document.querySelector(".background-typer"));
+// outEl.innerHTML = str;
+
+// var subChar = "💩";
+
+// function traverse(el) {
+//   el.each(function processChild(index) {
+//     // console.log(index + ": " + $(this).text());
+//     var childWrapped = $(this).children().each(processChild);
+//     console.log(
+//       index +
+//         ": " +
+//         " class = " +
+//         $(this).attr("class") +
+//         " type = " +
+//         $(this).prop("tagName")
+//     );
+//     console.log("Child HTML = " + childWrapped.html());
+//     console.log("Child text = " + childWrapped.text());
+//     console.log("HTML = " + $(this).html());
+//     console.log("text = " + $(this).text().trim());
+
+//     if (typeof childWrapped.html() === "undefined") {
+//       var edited = $(this)
+//         .text()
+//         .replace(/./g, "<span class='char'>$&</span>");
+//       // $(this).html(edited);
+//     } else {
+//       var filteredChildText = (function (f, str) {
+//         for (let i = 0; i < f.length; i++) {
+//           var subStr = f.substr(0, f.length - i);
+//           if (RegExp(subStr, "g").test(str)) {
+//             return subStr;
+//           }
+//         }
+//       })(childWrapped.text(), $(this).text().trim());
+//       var regxTest1 = new RegExp(filteredChildText, "g");
+//       var regxTest2 = new RegExp("[^" + subChar + "]", "g");
+//       var regxTest3 = new RegExp(subChar, "g");
+//       console.log(
+//         "Regxtest1 = " +
+//           regxTest1 +
+//           " Regxtest2 = " +
+//           regxTest2 +
+//           " text len: " +
+//           $(this).text().length +
+//           " Filtered Child Text: " +
+//           filteredChildText
+//       );
+//       var edited = $(this)
+//         .text()
+//         .trim()
+//         .replace(RegExp(filteredChildText, "g"), subChar)
+//         .replace(RegExp("[^" + subChar + "]", "g"), "<span class='char'>$&</span>")
+//         .replace(/(?<=>)<(?=<)/g, "&lt;")
+//         .replace(/(?<=>)>(?=<)/g, "&gt;")
+//         .replace(RegExp(subChar, "g"), childWrapped.html());
+//       // console.log("edited = " + edited);
+//       console.log("regexTest = " + edited);
+//     }
+//     $(this).html(
+//       "<" +
+//         $(this).prop("tagName") +
+//         " class='" +
+//         $(this).attr("class") +
+//         "'>" +
+//         edited +
+//         "</" +
+//         $(this).prop("tagName") +
+//         ">"
+//     );
+
+//     // console.log($(this).html())
+//     // console.log($(this).text())
+//     return $(this);
+
+//     // console.log(typeof(edited));
+//     // console.log($(this).wrap("<" + $(this).prop("tagName") + " class='" + $(this).attr("class") + "'></"+ $(this).prop("tagName") + ">").html());
+//   });
+//   // console.log(el)
+// }
+
+// traverse($("p"));
+
+// <\/[A-Za-z0-9]+> or <\/.*> for </html>
+// <[A-Za-z0-9\s]+> for <html>
+// (?<=<)[^<>]*(?=>) for < match >
+// (?<=>)[^><]*(?=<) for > match <  
+// [^`\r\n\v] this is cheesing it with a sub char of `
+// .(?=html((?<=html).+?)) for <html> Hello World </html> matches -> <, >, /, >
+
+// Test Regex
+// ----------------------------
+// (.*?)(html|)
+//       ma
+// t
+// bla
+// <html>
+
+// <html> Hello world </html>
+
+// html
+// ------------------------------------      
+// ([\s\S]*?)(red|green|blue|)
+//         whiteredwhiteredgreenbluewhiteredgreenbluewhiteredgreenbluewhiteredgreenbluewhiteredgreenbluewhiteredgreenbluewhiteredgreenbluewhiteredwhiteredwhiteredwhiteredwhiteredwhiteredgreenbluewhiteredwhiteredwhiteredwhiteredwhiteredredgreenredgreenredgreenredgreenredgreenbluewhiteredbluewhiteredbluewhiteredbluewhiteredbluewhiteredwhite   
+// ------------------------------------
+// ^(?!(red|green|blue)$).+$
+
+// red
+// green
+// blue
+// redd
+// greenn
+// bluee
+// foo
+// bar
+
+// ------------------------------------
+// .+?(?=html)|(?<=html).+
+
+//   html
+// <html>
+// <html> Hello World </html>
+// -----------------------------------
+//   .+?(?=html)
+// html
+// <html>
+// <html> Hello World </html>
+// hello world
+
+// .tag {
+//   color: #ff3c41;
+// }
+
+// .inner {
+//   margin-left: 1rem;
+// }
+
+// .letter {
+//   border-bottom: 1px solid blue;
+// } -->
