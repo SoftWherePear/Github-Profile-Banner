@@ -7,7 +7,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* color: #fff; */
+            color: #fff;
+        }
+
+        body {
+            background: #0D1117;
         }
     
         .tag {
@@ -38,12 +42,17 @@
         $("p").html($("p").html().trim().replace(/\n/g, "<br>"));
 
         var options = {
-            stringsElement: "#typed-strings",
-            loop: true,
-            typeSpeed: 70,
-            backDelay: 2000,
-        };
+                stringsElement: "#typed-strings",
+                loop: true,
+                typeSpeed: 70,
+                backDelay: 2000,
+                preStringTyped: (arrayPos, self) => {
+                    console.log(self.sequence[arrayPos]);
+                },
+            };
 
         var typed = new Typed("#typed", options);
+
+        console.log("Hello World");
     </script>
 </body>
