@@ -34,7 +34,7 @@
             <span class="inner">&lt<span class="tag">h1</span>&gt Thanks for visiting :) &lt/<span class="tag">h1</span>&gt</span>
             &lt/<span class="tag">html</span>&gt
         </p> -->
-        <span>0123456789</span>
+        <span id="text">0123456789</span>
     </div>
     
     <span id="typed"></span>
@@ -42,14 +42,27 @@
     <script>
         // $("p").html($("p").html().trim().replace(/\n/g, "<br>"));
 
+        var text = ['0123456789','9876543210'];
+
         console.time("timer");
         var options = {
                 stringsElement: "#typed-strings",
-                loop: false,
-                typeSpeed: 0,
-                backDelay: 0,
+                loop: true,
+                typeSpeed: 100,
+                backDelay: 2000,
                 onBegin: function (self) {console.log('onBegin ' + self) },
-                onComplete: function (self) { console.timeEnd("timer"); console.log('onCmplete ' + self) },
+                onComplete: function (self) {
+                    console.log('onCmplete ' + self);
+                    console.log('typedStr: ' + self.strings[self.arrayPos]);
+                    console.log('text: ' + text[0]);
+                    if(self.strings[self.arrayPos] === text[0]) {
+                        self.strings[self.arrayPos] = text[1];
+                        // console.log("new text: " + $("#text").text());
+                    } else {
+                        self.strings[self.arrayPos] = text[0];
+                    }
+                    // console.timeEnd("timer"); 
+                },
                 preStringTyped: function (pos, self) { console.log('preStringTyped ' + pos + ' ' + self); },
                 onStringTyped: function (pos, self) { console.log('onStringTyped ' + pos + ' ' + self) },
                 onLastStringBackspaced: function (self) { console.log('onLastStringBackspaced ' + self) },
