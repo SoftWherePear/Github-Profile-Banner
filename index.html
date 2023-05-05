@@ -106,9 +106,9 @@
 
     <script>
         var outputIdx = 0;
-        var outputText = [];
-        $("p").each(function () { outputText.push($(this).html().trim()) });
-        
+        var outputText = $("p").map(function() {
+            return $(this).html().trim();
+        });
 
         console.time("timer");
         var options = {
