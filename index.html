@@ -20,7 +20,7 @@
         #container {
             background-color: #fff;
             display: grid;
-            grid: 1fr / "col-1 col-2 col-3" 1fr 1fr 1fr;
+            grid: 1fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr;
             grid-auto-flow: row;
             place-items: start;
             /* justify-content: stretch; */
@@ -31,30 +31,30 @@
             height: 100%;
         }
 
-        #col-0 {
+        /* #col-0 {
             grid-column: 1;
-        }
+        } */
 
         /* #col-2 {
             grid-column: 2;
         } */
 
-        #col-2 {
+        /* #col-2 {
             grid-column: 3;
-        }
+        } */
 
         /* #typed-1 {
             width: 100%;
         } */
 
-        .col {
+        .cell {
             width: 100%;
             border: 2px #ffe603 solid;
             height: 100%;
             /* display: block; */
         }
 
-        .text {
+        .typer {
             position: absolute;
             /* height: 100%; */
         }
@@ -63,9 +63,9 @@
             position: relative;
         } */
     
-        /* .hidden {
+        .hidden {
             display: none;
-        } */
+        }
     
         .var {
             /*   color: #c678dd; Dark */
@@ -115,15 +115,26 @@
 </head>
 
 <body>
-    <p>
+    <p>&lt<span class="tag">h1</span>&gt Hello World! &lt/<span class="tag">h1</span>&gt</p>
+    <p>&lt<span class="tag">h1</span>&gt This is a HTML, CSS, and JS animation. &lt/<span class="tag">h1</span>&gt</p>
+    <p>&lt<span class="tag">h1</span>&gt Embedded in an SVG for your enjoyment! &lt/<span class="tag">h1</span>&gt</p>
+    <p>&lt<span class="tag">h1</span>&gt Thanks for visiting :) &lt/<span class="tag">h1</span>&gt</p>
+    <!-- <p> Hello World</p>
+    <p> Cheese </p>
+    <p> Yo Bro </p>
+    <p> Crab People </p>
+    <p> Cracker Jack </p>
+    <p> Jimmy Crack Corn </p>
+    <p> Chimichanga </p> -->
+    <!-- <p>
         &lt<span class="tag">html</span>&gt<br>
         <span class="inner">&lt<span class="tag">h1</span>&gt Hello World! &lt/<span class="tag">h1</span>&gt</span><br>
         <span class="inner">&lt<span class="tag">h1</span>&gt This is a HTML, CSS, and JS animation. &lt/<span class="tag">h1</span>&gt</span><br>
         <span class="inner">&lt<span class="tag">h1</span>&gt Embedded in an SVG for your enjoyment! &lt/<span class="tag">h1</span>&gt</span><br>
         <span class="inner">&lt<span class="tag">h1</span>&gt Thanks for visiting :) &lt/<span class="tag">h1</span>&gt</span><br>
         &lt/<span class="tag">html</span>&gt
-    </p>
-    <p>
+    </p> -->
+    <!-- <p>
         <span class="var">var</span> softwherepear <span class="eq">=</span> {<br>
         <span class="inner"> <span class="prop">name</span>: <span class="string">"Alexander"</span>,</span><br>
         <span class="inner"><span class="prop">type</span>: <span class="string">"Human"</span>,</span><br>
@@ -146,61 +157,101 @@
         <span class="class">.hidden</span> {<br>
         <span class="inner2">display: none;</span><br>
         }
-    </p>
+    </p> -->
     
     <script>
-        $("p").each(function (i) {
-            $(this).wrap("<div id='col-" + i + "' class='col'></div>");
-            $(this).after("<div class='text'><span id='typed-" + i + "'></span></div>");
-            $(this).wrap("<div id='text-" + i + "'></div>");
-        });
-        $(".col").wrapAll("<div id='container'></div>");
+        // $("p").each(function (i) {
+        //     $(this).wrap("<div id='col-" + i + "' class='col'></div>");
+        //     $(this).after("<div class='text'><span id='typed-" + i + "'></span></div>");
+        //     $(this).wrap("<div id='text-" + i + "'></div>");
+        // });
+        // $(".col").wrapAll("<div id='container'></div>");
 
-        var [outputIdx_1, outputIdx_2, outputIdx_3] = [0, 1, 2];
-        var outputText = $("p").map(function () {
-            return $(this).html().trim();
+        // var [outputIdx_1, outputIdx_2, outputIdx_3] = [0, 1, 2];
+        // var outputText = $("p").map(function () {
+        //     return $(this).html().trim();
+        // });
+        // var outputIdx = Array.from(Array(outputText.length), (e, i) => i);
+        $("p").each(function () {
+            $(this).addClass("hidden");
         });
-        var outputIdx = Array.from(Array(outputText.length), (e, i) => i);
-        console.log(outputIdx);
+        $("p").wrapAll("<div id='text'></div>");
+        $("#text").after("<div id='container'></div>");
+
+        const cellCount = function (gridCSS) {
+            rows = gridCSS[0].trim().split(" ").length;
+            cols = gridCSS[1].trim().split(" ").length;
+            return rows * cols;
+        }($("#container").css("grid").split("/"));
+
+        for (i = 0; i < cellCount; i++) {
+            $("#container").append("<div class='cell'><div class='typer'><span id='typed-" + i + "'></span></div></div>");
+        }
+
+        var textStrings = $("p").map(function () {
+            return $(this).html().trim();
+        }).get();
 
         // console.time("timer");
         var options = {
-            stringsElement: "#text-0",
-            loop: true,
+            strings: [],
             typeSpeed: 70,
             backDelay: 2000,
-            onComplete: function (self) {
-                if (outputIdx_1 === 2) {
-                    outputIdx_1 = -1;
-                }
+            loop: true,
+            onBegin: function (self) { console.log('onBegin ' + self) },
+            onComplete: function (self) { console.log('onCmplete ' + self) },
+            preStringTyped: function (pos, self) { console.log('preStringTyped ' + pos + ' ' + self); },
+            onStringTyped: function (pos, self) { console.log('onStringTyped ' + pos + ' ' + self) },
+            onTypingPaused: function (pos, self) { console.log('onTypingPaused ' + pos + ' ' + self) },
+            onTypingResumed: function (pos, self) { console.log('onTypingResumed ' + pos + ' ' + self) },
+            onReset: function (self) { console.log('onReset ' + self) },
+            onStop: function (pos, self) { console.log('onStop ' + pos + ' ' + self) },
+            onStart: function (pos, self) { console.log('onStart ' + pos + ' ' + self) },
+            onDestroy: function (self) { console.log('onDestroy ' + self) }
+            // onComplete: function (self) {
+            //     if (outputIdx[0] === outputText.length-1) {
+            //         outputIdx[0] = -1;
+            //     }
 
-                outputIdx_1 += 1;
-                self.strings[self.arrayPos] = outputText[outputIdx_1];
-            },
+            //     outputIdx[0] += 1;
+            //     self.strings[self.arrayPos] = outputText[outputIdx[0]];
+            // },
         };
 
-        var typed_1 = new Typed("#typed-0", options);
+        // var typed_0 = new Typed("#typed-0", options);
 
-        options.stringsElement = "#text-1";
-        options.onComplete = function (self) {
-            if (outputIdx_2 === 2) {
-                outputIdx_2 = -1;
-            }
-
-            outputIdx_2 += 1;
-            self.strings[self.arrayPos] = outputText[outputIdx_2];
+        var typedArr = Array(cellCount);
+        for (i = 0; i < cellCount; i++) {
+            options.strings = textStrings;
+            // options.onComplete = function (self) {
+            //     self.reset();
+            // }
+            // options.onBegin = function (self) {
+            //     // if (self.strPos === 0) {
+            //     //     self.arrayPos = Math.floor(Math.random() * (self.squence.length + 1));
+            //     // }
+            //     console.log("Begin");
+            // }
+            typedArr[i] = new Typed("#typed-"+i, options);
+            textStrings.sort(() => Math.random() - 0.5);
+            console.log("Loop: " + i);
         }
-        var typed_2 = new Typed("#typed-1", options);
 
-        options.stringsElement = "#text-2";
-        options.onComplete = function (self) {
-            if (outputIdx_3 === 2) {
-                outputIdx_3 = -1;
-            }
+        console.log(typedArr);
+        console.log(typedArr[0]);
+        console.log(typedArr[1]);
 
-            outputIdx_3 += 1;
-            self.strings[self.arrayPos] = outputText[outputIdx_3];
-        }
-        var typed_3 = new Typed("#typed-2", options);
+       
+
+        // options.stringsElement = "#text-2";
+        // options.onComplete = function (self) {
+        //     if (outputIdx_3 === 2) {
+        //         outputIdx_3 = -1;
+        //     }
+
+        //     outputIdx_3 += 1;
+        //     self.strings[self.arrayPos] = outputText[outputIdx_3];
+        // }
+        // var typed_3 = new Typed("#typed-2", options);
     </script>
 </body>
