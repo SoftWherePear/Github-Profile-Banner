@@ -31,7 +31,7 @@
             height: 100%;
         }
 
-        #col-1 {
+        #col-0 {
             grid-column: 1;
         }
 
@@ -39,7 +39,7 @@
             grid-column: 2;
         } */
 
-        #col-3 {
+        #col-2 {
             grid-column: 3;
         }
 
@@ -115,72 +115,57 @@
 </head>
 
 <body>
-    <div id="container">
-        <div id="col-1" class="col">
-            <div id="text-1">
-                <p>
-                    &lt<span class="tag">html</span>&gt<br>
-                    <span class="inner">&lt<span class="tag">h1</span>&gt Hello World! &lt/<span class="tag">h1</span>&gt</span><br>
-                    <span class="inner">&lt<span class="tag">h1</span>&gt This is a HTML, CSS, and JS animation. &lt/<span class="tag">h1</span>&gt</span><br>
-                    <span class="inner">&lt<span class="tag">h1</span>&gt Embedded in an SVG for your enjoyment! &lt/<span class="tag">h1</span>&gt</span><br>
-                    <span class="inner">&lt<span class="tag">h1</span>&gt Thanks for visiting :) &lt/<span class="tag">h1</span>&gt</span><br>
-                    &lt/<span class="tag">html</span>&gt
-                </p>
-            </div>
-            <div class="text">
-                <span id="typed-1"></span>
-            </div>
-        </div>
-        <div id="col-2" class="col">
-            <div id="text-2">
-                <p>
-                    <span class="var">var</span> softwherepear <span class="eq">=</span> {<br>
-                    <span class="inner"> <span class="prop">name</span>: <span class="string">"Alexander"</span>,</span><br>
-                    <span class="inner"><span class="prop">type</span>: <span class="string">"Human"</span>,</span><br>
-                    <span class="inner"><span class="prop">location</span>: <span class="string">"Earth"</span>,</span><br>
-                    <span class="inner"><span class="prop">skills</span>: [<span class="string">"Javascript"</span>,</span><br>
-                    <span class="string inner3">"HTML"</span>,<br>
-                    <span class="string inner3">"CSS"</span>,<br>
-                    <span class="string inner3">"Shopify Liquid"</span>];<br>
-                    };
-                </p>
-            </div>
-            <div class="text">
-                <span id="typed-2"></span>
-            </div>
-        </div>
-        <div id="col-3" class="col">
-            <div id="text-3">
-                <p>
-                    <span class="element">*</span> {<br>
-                    <span class="inner2">margin: <span class="num">0</span>;</span><br>
-                    <span class="inner2">padding: <span class="num">0</span>;<br>
-                    <span class="inner2"> box-sizing: border-box;</span><br>
-                    <span class="inner2">background-color: <span class="num">#</span><span class="hex">000</span>;</span><br>
-                    <span class="inner2">color: <span class="num">#</span><span class="hex">fff</span>;</span><br>
-                    }<br>
-                    <br>
-                    <span class="class">.hidden</span> {<br>
-                    <span class="inner2">display: none;</span><br>
-                    }
-                </p>
-            </div>
-            <div class="text">
-                <span id="typed-3"></span>
-            </div>
-        </div>
-    </div>
-    
+    <p>
+        &lt<span class="tag">html</span>&gt<br>
+        <span class="inner">&lt<span class="tag">h1</span>&gt Hello World! &lt/<span class="tag">h1</span>&gt</span><br>
+        <span class="inner">&lt<span class="tag">h1</span>&gt This is a HTML, CSS, and JS animation. &lt/<span class="tag">h1</span>&gt</span><br>
+        <span class="inner">&lt<span class="tag">h1</span>&gt Embedded in an SVG for your enjoyment! &lt/<span class="tag">h1</span>&gt</span><br>
+        <span class="inner">&lt<span class="tag">h1</span>&gt Thanks for visiting :) &lt/<span class="tag">h1</span>&gt</span><br>
+        &lt/<span class="tag">html</span>&gt
+    </p>
+    <p>
+        <span class="var">var</span> softwherepear <span class="eq">=</span> {<br>
+        <span class="inner"> <span class="prop">name</span>: <span class="string">"Alexander"</span>,</span><br>
+        <span class="inner"><span class="prop">type</span>: <span class="string">"Human"</span>,</span><br>
+        <span class="inner"><span class="prop">location</span>: <span class="string">"Earth"</span>,</span><br>
+        <span class="inner"><span class="prop">skills</span>: [<span class="string">"Javascript"</span>,</span><br>
+        <span class="string inner3">"HTML"</span>,<br>
+        <span class="string inner3">"CSS"</span>,<br>
+        <span class="string inner3">"Shopify Liquid"</span>];<br>
+        };
+    </p>
+    <p>
+        <span class="element">*</span> {<br>
+        <span class="inner2">margin: <span class="num">0</span>;</span><br>
+        <span class="inner2">padding: <span class="num">0</span>;<br>
+        <span class="inner2"> box-sizing: border-box;</span><br>
+        <span class="inner2">background-color: <span class="num">#</span><span class="hex">000</span>;</span><br>
+        <span class="inner2">color: <span class="num">#</span><span class="hex">fff</span>;</span><br>
+        }<br>
+        <br>
+        <span class="class">.hidden</span> {<br>
+        <span class="inner2">display: none;</span><br>
+        }
+    </p>
     
     <script>
+        $("p").each(function (i) {
+            $(this).wrap("<div id='col-" + i + "' class='col'></div>");
+            $(this).after("<div class='text'><span id='typed-" + i + "'></span></div>");
+            $(this).wrap("<div id='text-" + i + "'></div>");
+        });
+        $(".col").wrapAll("<div id='container'></div>");
+
         var [outputIdx_1, outputIdx_2, outputIdx_3] = [0, 1, 2];
         var outputText = $("p").map(function () {
             return $(this).html().trim();
         });
+        var outputIdx = Array.from(Array(outputText.length), (e, i) => i);
+        console.log(outputIdx);
 
         // console.time("timer");
         var options = {
-            stringsElement: "#text-1",
+            stringsElement: "#text-0",
             loop: true,
             typeSpeed: 70,
             backDelay: 2000,
@@ -194,9 +179,9 @@
             },
         };
 
-        var typed_1 = new Typed("#typed-1", options);
+        var typed_1 = new Typed("#typed-0", options);
 
-        options.stringsElement = "#text-2";
+        options.stringsElement = "#text-1";
         options.onComplete = function (self) {
             if (outputIdx_2 === 2) {
                 outputIdx_2 = -1;
@@ -205,9 +190,9 @@
             outputIdx_2 += 1;
             self.strings[self.arrayPos] = outputText[outputIdx_2];
         }
-        var typed_2 = new Typed("#typed-2", options);
+        var typed_2 = new Typed("#typed-1", options);
 
-        options.stringsElement = "#text-3";
+        options.stringsElement = "#text-2";
         options.onComplete = function (self) {
             if (outputIdx_3 === 2) {
                 outputIdx_3 = -1;
@@ -216,6 +201,6 @@
             outputIdx_3 += 1;
             self.strings[self.arrayPos] = outputText[outputIdx_3];
         }
-        var typed_3 = new Typed("#typed-3", options);
+        var typed_3 = new Typed("#typed-2", options);
     </script>
 </body>
