@@ -12,8 +12,8 @@
     
         body {
             /* background: #0D1117; #282c34 */
-            width: 1200px;
-            height: 400px;
+            width: 1100;
+            height: 300px;
             background-color: #000;
         }
     
@@ -48,10 +48,20 @@
         } */
 
         .col {
-            width: 55%;
+            width: 100%;
             border: 2px #ffe603 solid;
+            height: 100%;
             /* display: block; */
         }
+
+        .text {
+            position: absolute;
+            /* height: 100%; */
+        }
+
+        /* .typed-cursor {
+            position: relative;
+        } */
     
         /* .hidden {
             display: none;
@@ -117,7 +127,9 @@
                     &lt/<span class="tag">html</span>&gt
                 </p>
             </div>
-            <span id="typed-1"></span>
+            <div class="text">
+                <span id="typed-1"></span>
+            </div>
         </div>
         <div id="col-2" class="col">
             <div id="text-2">
@@ -133,7 +145,9 @@
                     };
                 </p>
             </div>
-            <span id="typed-2"></span>
+            <div class="text">
+                <span id="typed-2"></span>
+            </div>
         </div>
         <div id="col-3" class="col">
             <div id="text-3">
@@ -151,7 +165,9 @@
                     }
                 </p>
             </div>
-            <span id="typed-3"></span>
+            <div class="text">
+                <span id="typed-3"></span>
+            </div>
         </div>
     </div>
     
