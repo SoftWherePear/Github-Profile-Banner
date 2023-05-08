@@ -160,6 +160,9 @@
     </p> -->
     
     <script>
+        function randRange(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
         // $("p").each(function (i) {
         //     $(this).wrap("<div id='col-" + i + "' class='col'></div>");
         //     $(this).after("<div class='text'><span id='typed-" + i + "'></span></div>");
@@ -172,9 +175,7 @@
         //     return $(this).html().trim();
         // });
         // var outputIdx = Array.from(Array(outputText.length), (e, i) => i);
-        $("p").each(function () {
-            $(this).addClass("hidden");
-        });
+        $("p").addClass("hidden");
         $("p").wrapAll("<div id='text'></div>");
         $("#text").after("<div id='container'></div>");
 
@@ -194,8 +195,9 @@
 
         // console.time("timer");
         var options = {
-            strings: [],
+            strings: textStrings,
             typeSpeed: 70,
+            smartBackspace: false,
             backDelay: 2000,
             loop: true,
             onBegin: function (self) { console.log('onBegin ' + self) },
@@ -222,7 +224,6 @@
 
         var typedArr = Array(cellCount);
         for (i = 0; i < cellCount; i++) {
-            options.strings = textStrings;
             // options.onComplete = function (self) {
             //     self.reset();
             // }
@@ -234,6 +235,10 @@
             // }
             typedArr[i] = new Typed("#typed-"+i, options);
             textStrings.sort(() => Math.random() - 0.5);
+            options.typeSpeed = randRange(50, 100);
+            options.backDelay = randRange(700, 3000);
+            options.backSpeed = randRange(0, 50);
+            options.startDelay = randRange(500, 5000) ;
             console.log("Loop: " + i);
         }
 
