@@ -247,8 +247,9 @@
         // $("#text").after("<div id='grid'></div>");
         $("p").last().after("<div id='grid'></div>");
 
-        console.log( Math.floor($("#grid").css("width").replace(/\D/g, "") / maxWidth));
-        console.log("Cheese");
+        console.log(Math.floor($("#grid").css("width").replace(/\D/g, "") / maxWidth));
+        console.log(Math.floor($("#grid").css("height").replace(/\D/g, "") / ($("p").css("line-height").replace(/\D/g, "") * 3)));
+        console.log("Cheese"); 
 
         const cellCount = function (gridCSS) {
             rows = gridCSS[0].trim().split(" ").length;
