@@ -20,10 +20,20 @@
         p, span {
             font-size: 16px;
             line-height: 20px;
-            background-color: aqua;
+            /* background-color: aqua; */
+        }
+
+        #wrapper {
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            width: 100%;
         }
     
         #grid {
+            position: absolute;
+            bottom: 0;
+            right: 0;
             background-color: #fff;
             display: grid;
             grid-auto-flow: row;
@@ -32,8 +42,8 @@
             /* align-content: stretch;   */
             /* gap: 0 10px; */
             /* place-content: center; */
-            width: 100%;
-            height: 100%;
+            width: 200%;
+            height: 200%;
         }
 
         /* #col-0 {
@@ -53,25 +63,29 @@
         } */
 
         .cell {
-            width: 100%;
+            /* width: 100%; */
             border: 2px #ffe603 solid;
-            height: 100%;
+            /* height: 100%; */
             display: flex;
+            place-self: stretch;
+            /* align-items: center;
+            justify-items: start; */
             /* display: block; */
         }
 
-        .typer {
-            /* position: absolute;
-            height: 100%; */
+        /* .typer {
+            position: absolute;
+            height: 100%;
             background-color: red;
-            /* margin: auto 0; */
-        }
+            margin: auto 0;
+        } */
 
         .typed, .typed-cursor {
             /* position: absolute; */
             /* height: 100%; */
             /* background-color: red; */
-            margin: auto 0;
+            /* margin: auto 0; */
+            align-self: center;
         }
 
         /* .typed-cursor {
@@ -134,6 +148,8 @@
     <p>&lt<span class="tag">h1</span>&gt This is a HTML, CSS, and JS animation. &lt/<span class="tag">h1</span>&gt</p>
     <p>&lt<span class="tag">h1</span>&gt Embedded in an SVG for your enjoyment! &lt/<span class="tag">h1</span>&gt</p>
     <p>&lt<span class="tag">h1</span>&gt Thanks for visiting :) &lt/<span class="tag">h1</span>&gt</p>
+    <p><span class="var">var</span> foo <span class="eq">=</span> <span class="string">"bar"</span>;</p>
+    <p><span class="var">var</span> fooBar <span class="eq">=</span> <span class="string">"baz"</span>;</p>
     <!-- <p> Hello World</p>
     <p> Cheese </p>
     <p> Yo Bro </p>
@@ -246,6 +262,7 @@
         // $("p").wrapAll("<div id='text'></div>");
         // $("#text").after("<div id='grid'></div>");
         $("p").last().after("<div id='grid'></div>");
+        $("#grid").wrap("<div id='wrapper'></div>");
 
         var numCols = Math.floor($("#grid").css("width").replace(/\D/g, "") / maxWidth);
         var numRows = Math.floor($("#grid").css("height").replace(/\D/g, "") / ($("p").css("line-height").replace(/\D/g, "") * 3));
@@ -272,11 +289,28 @@
             // $("#grid").append("<div class='cell'><div class='typer'><span id='typed-" + i + "' class='typed'></span></div></div>");
         }
 
-        maxWidth = 0;
-        $(".typed").each(function() {
-            maxWidth = Math.max(maxWidth, $(this).width());
-        });
-        console.log(maxWidth);
+        // maxWidth = 0;
+        // $(".typed").each(function() {
+        //     maxWidth = Math.max(maxWidth, $(this).width());
+        // });
+        // console.log(maxWidth);
+
+        var gridAnimation = `
+        @keyframes diagonal-pan {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(`+ $("#wrapper").css("width") +", "+ $("#wrapper").css("height") +`);
+            }
+        }`;
+
+        console.log($("#wrapper").css("width"));
+        console.log($("#grid").css("width"));
+        console.log(gridAnimation);
+        
+        $("<style>"+ gridAnimation + "</style>").appendTo("head");
+        $("#grid").css("animation", "diagonal-pan 20s linear infinite");
 
         // console.time("timer");
         var options = {
