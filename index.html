@@ -12,12 +12,18 @@
     
         body {
             /* background: #0D1117; #282c34 */
-            width: 1100;
+            width: 1100px;
             height: 300px;
             background-color: #000;
         }
+
+        p, span {
+            font-size: 16px;
+            line-height: 20px;
+            background-color: aqua;
+        }
     
-        #container {
+        #grid {
             background-color: #fff;
             display: grid;
             grid: 1fr 1fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr;
@@ -51,12 +57,22 @@
             width: 100%;
             border: 2px #ffe603 solid;
             height: 100%;
+            display: flex;
             /* display: block; */
         }
 
         .typer {
-            position: absolute;
+            /* position: absolute;
+            height: 100%; */
+            background-color: red;
+            /* margin: auto 0; */
+        }
+
+        .typed, .typed-cursor {
+            /* position: absolute; */
             /* height: 100%; */
+            /* background-color: red; */
+            margin: auto 0;
         }
 
         /* .typed-cursor {
@@ -163,12 +179,63 @@
         function randRange(min, max) {
             return Math.floor(Math.random() * (max - min + 1) + min);
         }
+
+        function getTextWidth(text, font) {
+            // re-use canvas object for better performance
+            const canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
+            const context = canvas.getContext("2d");
+            context.font = font;
+            return context.measureText(text).width;
+        }
+
+        function getHtmlText(html){
+            // Create a new div element
+            var temp = document.createElement("div");
+            // Set the HTML content with the given value
+            temp.innerHTML = html;
+            // Retrieve the text property of the element 
+            var text = temp.textContent || temp.innerText || "";
+            // Destroy temp element
+            temp.remove();
+            // Return the text
+            return text;
+        }
+
+        var textStrings = $("p").map(function () {
+            return $(this).html().trim();
+        }).get();
+
+
+        var style = Object.values($("p").css(["font-weight", "font-size", "font-family"])).join(" ").replace(/"/g, "");
+        var longestStr = textStrings.reduce(function (a, b) {
+                return a.length > b.length ? a : b;
+            }
+        );
+
+        console.log(getHtmlText(longestStr));
+        console.log(style);
+        console.log(textStrings.reduce(function (a, b) {
+                return a.length > b.length ? a : b;
+            }
+        ).replace(/<[^>]+>/g, '').length);
+
+        var maxWidth = getTextWidth(getHtmlText(longestStr), style);
+        console.log(maxWidth);
+
+        // var maxWidth = 0;
+        // $("p").each(function() {
+        //     console.log(maxWidth);
+        //     maxWidth = Math.max(maxWidth, $(this).width());
+        // });
+        // console.log(maxWidth);
+        console.log(typeof(+$("span").css("line-height").split("px")[0]));
+        console.log(3 * $("span").css("font-size").replace(/\D/g, ""));
         // $("p").each(function (i) {
         //     $(this).wrap("<div id='col-" + i + "' class='col'></div>");
         //     $(this).after("<div class='text'><span id='typed-" + i + "'></span></div>");
         //     $(this).wrap("<div id='text-" + i + "'></div>");
         // });
-        // $(".col").wrapAll("<div id='container'></div>");
+        // $(".col").wrapAll("<div id='grid'></div>");
 
         // var [outputIdx_1, outputIdx_2, outputIdx_3] = [0, 1, 2];
         // var outputText = $("p").map(function () {
@@ -176,22 +243,29 @@
         // });
         // var outputIdx = Array.from(Array(outputText.length), (e, i) => i);
         $("p").addClass("hidden");
-        $("p").wrapAll("<div id='text'></div>");
-        $("#text").after("<div id='container'></div>");
+        // $("p").wrapAll("<div id='text'></div>");
+        // $("#text").after("<div id='grid'></div>");
+        $("p").last().after("<div id='grid'></div>");
+
+        console.log( Math.floor($("#grid").css("width").replace(/\D/g, "") / maxWidth));
+        console.log("Cheese");
 
         const cellCount = function (gridCSS) {
             rows = gridCSS[0].trim().split(" ").length;
             cols = gridCSS[1].trim().split(" ").length;
             return rows * cols;
-        }($("#container").css("grid").split("/"));
+        }($("#grid").css("grid").split("/"));
 
         for (i = 0; i < cellCount; i++) {
-            $("#container").append("<div class='cell'><div class='typer'><span id='typed-" + i + "'></span></div></div>");
+            $("#grid").append("<div class='cell'><span id='typed-" + i + "' class='typed'></span></div>");
+            // $("#grid").append("<div class='cell'><div class='typer'><span id='typed-" + i + "' class='typed'></span></div></div>");
         }
 
-        var textStrings = $("p").map(function () {
-            return $(this).html().trim();
-        }).get();
+        maxWidth = 0;
+        $(".typed").each(function() {
+            maxWidth = Math.max(maxWidth, $(this).width());
+        });
+        console.log(maxWidth);
 
         // console.time("timer");
         var options = {
@@ -204,12 +278,12 @@
             onComplete: function (self) { console.log('onCmplete ' + self) },
             preStringTyped: function (pos, self) { console.log('preStringTyped ' + pos + ' ' + self); },
             onStringTyped: function (pos, self) { 
-                console.log('onStringTyped ' + pos + ' ' + 
-                self.typeSpeed + ' ' +
-                self.backDelay + ' ' +
-                self.backSpeed + ' ' +
-                self.startDelay + ' ' 
-                );
+                // console.log('onStringTyped ' + pos + ' ' + 
+                // self.typeSpeed + ' ' +
+                // self.backDelay + ' ' +
+                // self.backSpeed + ' ' +
+                // self.startDelay + ' ' 
+                // );
                 self.typeSpeed = randRange(50, 80);
                 self.backDelay = randRange(700, 3000);
                 self.backSpeed = randRange(0, 30);
