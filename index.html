@@ -26,7 +26,6 @@
         #grid {
             background-color: #fff;
             display: grid;
-            grid: 1fr 1fr 1fr 1fr 1fr 1fr / 1fr 1fr 1fr;
             grid-auto-flow: row;
             place-items: start;
             /* justify-content: stretch; */
@@ -182,9 +181,10 @@
 
         function getTextWidth(text, font) {
             // re-use canvas object for better performance
-            const canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
-            const context = canvas.getContext("2d");
+            var canvas = document.createElement("canvas");
+            var context = canvas.getContext("2d");
             context.font = font;
+            canvas.remove();
             return context.measureText(text).width;
         }
 
@@ -247,15 +247,25 @@
         // $("#text").after("<div id='grid'></div>");
         $("p").last().after("<div id='grid'></div>");
 
-        console.log(Math.floor($("#grid").css("width").replace(/\D/g, "") / maxWidth));
-        console.log(Math.floor($("#grid").css("height").replace(/\D/g, "") / ($("p").css("line-height").replace(/\D/g, "") * 3)));
+        var numCols = Math.floor($("#grid").css("width").replace(/\D/g, "") / maxWidth);
+        var numRows = Math.floor($("#grid").css("height").replace(/\D/g, "") / ($("p").css("line-height").replace(/\D/g, "") * 3));
+        console.log(numCols);
+        console.log(numRows);
         console.log("Cheese"); 
 
-        const cellCount = function (gridCSS) {
-            rows = gridCSS[0].trim().split(" ").length;
-            cols = gridCSS[1].trim().split(" ").length;
-            return rows * cols;
-        }($("#grid").css("grid").split("/"));
+        var gridDim = ["1fr ".repeat(numRows), "1fr ".repeat(numCols)].join("/ ");
+        console.log(gridDim);
+        $("#grid").css("grid", gridDim);
+        console.log($("#grid").css("grid"));
+
+        const cellCount = numCols * numRows;
+
+
+        // const cellCount = function (gridCSS) {
+        //     rows = gridCSS[0].trim().split(" ").length;
+        //     cols = gridCSS[1].trim().split(" ").length;
+        //     return rows * cols;
+        // }($("#grid").css("grid").split("/"));
 
         for (i = 0; i < cellCount; i++) {
             $("#grid").append("<div class='cell'><span id='typed-" + i + "' class='typed'></span></div>");
