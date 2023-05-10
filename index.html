@@ -320,18 +320,21 @@
         $("#grid").css("animation", "diagonal-pan 20s linear infinite alternate");
 
         for (i = 0; i < numRows; i++) {
-            var w = $("#wrapper").css("width").replace(/\D/g, "");
+            var mw = $("#wrapper").css("width").replace(/\D/g, "");
+            var w = randRange(Math.floor(mw/4), Math.floor(mw * 1.5));
             var rowAnimation = `
             @keyframes slide-r` + i + `{
                 0% {
                     transform: translate(0, 0);
                 }
                 100% {
-                    transform: translate(`+ randRange(Math.floor(w/4), w) +`px, 0);
+                    transform: translate(`+ w +`px, 0);
                 }
             }`;
             $("<style>"+ rowAnimation + "</style>").appendTo("head");
-            $(".row-" + i).css("animation", "slide-r" + i + " 20s linear infinite alternate")
+            // var cw = "--w" + i;
+            // cRow.css(cw, w);
+            $(".row-" + i).css({"animation": "slide-r" + i + " 20s linear infinite alternate", ["--w-" + 1]: w + "px"});
         }
 
         // console.time("timer");
