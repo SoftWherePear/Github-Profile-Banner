@@ -28,6 +28,7 @@
             position: relative;
             height: 100%;
             width: 100%;
+            filter: blur(1.5px);
         }
     
         #grid {
@@ -64,7 +65,7 @@
 
         .cell {
             /* width: 100%; */
-            border: 2px #ffe603 solid;
+            /* border: 2px #ffe603 solid; */
             /* height: 100%; */
             display: flex;
             place-self: stretch;
@@ -284,8 +285,13 @@
         //     return rows * cols;
         // }($("#grid").css("grid").split("/"));
 
-        for (i = 0; i < cellCount; i++) {
-            $("#grid").append("<div class='cell'><span id='typed-" + i + "' class='typed'></span></div>");
+        var currRow = 0;
+        for (i = 1; i <= cellCount; i++) {
+            // $("#grid").append("<div class='cell'><span id='typed-" + i + "' class='typed'></span></div>");
+            $("#grid").append("<div class='cell row-" + currRow + "'><span id='typed-" + i + "' class='typed'></span></div>");
+            if (i % numCols === 0) {
+                currRow++;
+            }
             // $("#grid").append("<div class='cell'><div class='typer'><span id='typed-" + i + "' class='typed'></span></div></div>");
         }
 
@@ -301,16 +307,32 @@
                 transform: translate(0, 0);
             }
             100% {
-                transform: translate(`+ $("#wrapper").css("width") +", "+ $("#wrapper").css("height") +`);
+                transform: translate(0, `+ $("#wrapper").css("height") +`);
             }
         }`;
+        // transform: translate(`+ $("#wrapper").css("width") +", "+ $("#wrapper").css("height") +`);
 
         console.log($("#wrapper").css("width"));
         console.log($("#grid").css("width"));
         console.log(gridAnimation);
         
         $("<style>"+ gridAnimation + "</style>").appendTo("head");
-        $("#grid").css("animation", "diagonal-pan 20s linear infinite");
+        $("#grid").css("animation", "diagonal-pan 20s linear infinite alternate");
+
+        for (i = 0; i < numRows; i++) {
+            var w = $("#wrapper").css("width").replace(/\D/g, "");
+            var rowAnimation = `
+            @keyframes slide-r` + i + `{
+                0% {
+                    transform: translate(0, 0);
+                }
+                100% {
+                    transform: translate(`+ randRange(Math.floor(w/4), w) +`px, 0);
+                }
+            }`;
+            $("<style>"+ rowAnimation + "</style>").appendTo("head");
+            $(".row-" + i).css("animation", "slide-r" + i + " 20s linear infinite alternate")
+        }
 
         // console.time("timer");
         var options = {
@@ -353,7 +375,7 @@
         // var typed_0 = new Typed("#typed-0", options);
 
         var typedArr = Array(cellCount);
-        for (i = 0; i < cellCount; i++) {
+        for (i = 1; i <= cellCount; i++) {
             // options.onComplete = function (self) {
             //     self.reset();
             // }
