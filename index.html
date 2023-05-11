@@ -1,6 +1,6 @@
 <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.5/typed.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.5/typed.min.js"></script>
 
     <style>
         * {
@@ -193,7 +193,7 @@
     
     <script>
         function randRange(min, max) {
-            return Math.floor(Math.random() * (max - min + 1) + min);
+            return Math.round(Math.random() * (max - min + 1) + min);
         }
 
         function getTextWidth(text, font) {
@@ -218,6 +218,13 @@
             return text;
         }
 
+        function transformNum(x, w, h) {
+            // var a = (0 - h/2)/((0 - w/2)**3);
+            var r = Math.round(h/2 * Math.sin(x + w) + h/2);
+            // console.log("r: " + r + " |  a: " + a + " |  x: " + x + " |  w/2: "+ w/2 + " |  h/2: " + h/2); 
+            return r;
+        }
+
         var textStrings = $("p").map(function () {
             return $(this).html().trim();
         }).get();
@@ -237,7 +244,7 @@
         ).replace(/<[^>]+>/g, '').length);
 
         var maxWidth = getTextWidth(getHtmlText(longestStr), style);
-        console.log(maxWidth);
+        console.log("maxWidth: " + maxWidth);
 
         // var maxWidth = 0;
         // $("p").each(function() {
@@ -265,13 +272,13 @@
         $("p").last().after("<div id='grid'></div>");
         $("#grid").wrap("<div id='wrapper'></div>");
 
-        var numCols = Math.floor($("#grid").css("width").replace(/\D/g, "") / maxWidth);
-        var numRows = Math.floor($("#grid").css("height").replace(/\D/g, "") / ($("p").css("line-height").replace(/\D/g, "") * 3));
+        let numCols = Math.floor($("#grid").css("width").replace(/\D/g, "") / maxWidth);
+        let numRows = Math.floor($("#grid").css("height").replace(/\D/g, "") / ($("p").css("line-height").replace(/\D/g, "") * 3));
         console.log(numCols);
         console.log(numRows);
         console.log("Cheese"); 
 
-        var gridDim = ["1fr ".repeat(numRows), "1fr ".repeat(numCols)].join("/ ");
+        let gridDim = ["1fr ".repeat(numRows), "1fr ".repeat(numCols)].join("/ ");
         console.log(gridDim);
         $("#grid").css("grid", gridDim);
         console.log($("#grid").css("grid"));
@@ -302,7 +309,7 @@
         // console.log(maxWidth);
 
         var gridAnimation = `
-        @keyframes diagonal-pan {
+        @keyframes scroll {
             0% {
                 transform: translate(0, 0);
             }
@@ -317,24 +324,34 @@
         console.log(gridAnimation);
         
         $("<style>"+ gridAnimation + "</style>").appendTo("head");
-        $("#grid").css("animation", "diagonal-pan 20s linear infinite alternate");
-
+        $("#grid").css("animation", "scroll 20s linear infinite alternate");
+        
+        const wrapWidth = $("#wrapper").css("width").replace(/\D/g, "");
         for (i = 0; i < numRows; i++) {
-            var mw = $("#wrapper").css("width").replace(/\D/g, "");
-            var w = randRange(Math.floor(mw/4), Math.floor(mw * 1.5));
+            // var mw = $("#wrapper").css("width").replace(/\D/g, "");
+            // console.log("mw " + mw);
+            var w = randRange(Math.floor(wrapWidth/4), Math.floor(wrapWidth * 1.5));
+
+            var cr = $(".row-" + i);
+            cr.css("--w", w + "px");
+
             var rowAnimation = `
             @keyframes slide-r` + i + `{
                 0% {
                     transform: translate(0, 0);
                 }
                 100% {
-                    transform: translate(`+ w +`px, 0);
+                    transform: translate(var(--w), 0);
                 }
             }`;
             $("<style>"+ rowAnimation + "</style>").appendTo("head");
             // var cw = "--w" + i;
             // cRow.css(cw, w);
-            $(".row-" + i).css({"animation": "slide-r" + i + " 20s linear infinite alternate", ["--w-" + 1]: w + "px"});
+            cr.css("animation", "slide-r" + i + " 20s linear infinite alternate");
+            cr.on('animationiteration',   
+            function() {
+                $(this).css("--w", transformNum($(this).css("--w").replace(/\D/g, ""), Math.floor(wrapWidth * 1.5), Math.floor(wrapWidth/4)) + "px");
+            });
         }
 
         // console.time("timer");
@@ -400,6 +417,18 @@
         console.log(typedArr);
         console.log(typedArr[0]);
         console.log(typedArr[1]);
+
+        // for (i = 0; i < numRows; i++) {
+        //     var w = randRange(Math.floor(wrapWidth/4), Math.floor(wrapWidth * 1.5));
+
+        //     var cr = $(".row-" + i);
+        //     $(".row-" + i).css("--w-" + i, w + "px");
+
+        //     // var cw = "--w" + i;
+        //     // cRow.css(cw, w);
+        //     cr.css("animation", "slide-r" + i + " 20s linear infinite alternate");
+        // }
+        
 
        
 
