@@ -218,11 +218,10 @@
             return text;
         }
 
-        function transformNum(x, w, h) {
-            // var a = (0 - h/2)/((0 - w/2)**3);
-            var r = Math.round(h/2 * Math.sin(x + w) + h/2);
-            // console.log("r: " + r + " |  a: " + a + " |  x: " + x + " |  w/2: "+ w/2 + " |  h/2: " + h/2); 
-            return r;
+        function pseudoRandNum(x, min, max) {
+            a = min + (max-min)/2;
+            n = ((a * x) % (max + 1)) / (max + 1)
+            return Math.round(n * (max - min + 1) + min);
         }
 
         var textStrings = $("p").map(function () {
@@ -330,7 +329,9 @@
         for (i = 0; i < numRows; i++) {
             // var mw = $("#wrapper").css("width").replace(/\D/g, "");
             // console.log("mw " + mw);
-            var w = randRange(Math.floor(wrapWidth/4), Math.floor(wrapWidth * 1.5));
+            const min = Math.floor(wrapWidth/4);
+            const max = Math.floor(wrapWidth * 1.5);
+            var w = randRange(min, max);
 
             var cr = $(".row-" + i);
             cr.css("--w", w + "px");
@@ -350,7 +351,7 @@
             cr.css("animation", "slide-r" + i + " 20s linear infinite alternate");
             cr.on('animationiteration',   
             function() {
-                $(this).css("--w", transformNum($(this).css("--w").replace(/\D/g, ""), Math.floor(wrapWidth * 1.5), Math.floor(wrapWidth/4)) + "px");
+                $(this).css("--w", pseudoRandNum($(this).css("--w").replace(/\D/g, ""), min, max) + "px");
             });
         }
 
