@@ -47,22 +47,6 @@
             height: 200%;
         }
 
-        /* #col-0 {
-            grid-column: 1;
-        } */
-
-        /* #col-2 {
-            grid-column: 2;
-        } */
-
-        /* #col-2 {
-            grid-column: 3;
-        } */
-
-        /* #typed-1 {
-            width: 100%;
-        } */
-
         .cell {
             /* width: 100%; */
             /* border: 2px #ffe603 solid; */
@@ -74,13 +58,6 @@
             /* display: block; */
         }
 
-        /* .typer {
-            position: absolute;
-            height: 100%;
-            background-color: red;
-            margin: auto 0;
-        } */
-
         .typed, .typed-cursor {
             /* position: absolute; */
             /* height: 100%; */
@@ -88,10 +65,6 @@
             /* margin: auto 0; */
             align-self: center;
         }
-
-        /* .typed-cursor {
-            position: relative;
-        } */
     
         .hidden {
             display: none;
@@ -151,45 +124,6 @@
     <p>&lt<span class="tag">h1</span>&gt Thanks for visiting :) &lt/<span class="tag">h1</span>&gt</p>
     <p><span class="var">var</span> foo <span class="eq">=</span> <span class="string">"bar"</span>;</p>
     <p><span class="var">var</span> fooBar <span class="eq">=</span> <span class="string">"baz"</span>;</p>
-    <!-- <p> Hello World</p>
-    <p> Cheese </p>
-    <p> Yo Bro </p>
-    <p> Crab People </p>
-    <p> Cracker Jack </p>
-    <p> Jimmy Crack Corn </p>
-    <p> Chimichanga </p> -->
-    <!-- <p>
-        &lt<span class="tag">html</span>&gt<br>
-        <span class="inner">&lt<span class="tag">h1</span>&gt Hello World! &lt/<span class="tag">h1</span>&gt</span><br>
-        <span class="inner">&lt<span class="tag">h1</span>&gt This is a HTML, CSS, and JS animation. &lt/<span class="tag">h1</span>&gt</span><br>
-        <span class="inner">&lt<span class="tag">h1</span>&gt Embedded in an SVG for your enjoyment! &lt/<span class="tag">h1</span>&gt</span><br>
-        <span class="inner">&lt<span class="tag">h1</span>&gt Thanks for visiting :) &lt/<span class="tag">h1</span>&gt</span><br>
-        &lt/<span class="tag">html</span>&gt
-    </p> -->
-    <!-- <p>
-        <span class="var">var</span> softwherepear <span class="eq">=</span> {<br>
-        <span class="inner"> <span class="prop">name</span>: <span class="string">"Alexander"</span>,</span><br>
-        <span class="inner"><span class="prop">type</span>: <span class="string">"Human"</span>,</span><br>
-        <span class="inner"><span class="prop">location</span>: <span class="string">"Earth"</span>,</span><br>
-        <span class="inner"><span class="prop">skills</span>: [<span class="string">"Javascript"</span>,</span><br>
-        <span class="string inner3">"HTML"</span>,<br>
-        <span class="string inner3">"CSS"</span>,<br>
-        <span class="string inner3">"Shopify Liquid"</span>];<br>
-        };
-    </p>
-    <p>
-        <span class="element">*</span> {<br>
-        <span class="inner2">margin: <span class="num">0</span>;</span><br>
-        <span class="inner2">padding: <span class="num">0</span>;<br>
-        <span class="inner2"> box-sizing: border-box;</span><br>
-        <span class="inner2">background-color: <span class="num">#</span><span class="hex">000</span>;</span><br>
-        <span class="inner2">color: <span class="num">#</span><span class="hex">fff</span>;</span><br>
-        }<br>
-        <br>
-        <span class="class">.hidden</span> {<br>
-        <span class="inner2">display: none;</span><br>
-        }
-    </p> -->
     
     <script>
         function randRange(min, max) {
@@ -197,7 +131,6 @@
         }
 
         function getTextWidth(text, font) {
-            // re-use canvas object for better performance
             var canvas = document.createElement("canvas");
             var context = canvas.getContext("2d");
             context.font = font;
@@ -235,77 +168,28 @@
             }
         );
 
-        console.log(getHtmlText(longestStr));
-        console.log(style);
-        console.log(textStrings.reduce(function (a, b) {
-                return a.length > b.length ? a : b;
-            }
-        ).replace(/<[^>]+>/g, '').length);
-
         var maxWidth = getTextWidth(getHtmlText(longestStr), style);
-        console.log("maxWidth: " + maxWidth);
 
-        // var maxWidth = 0;
-        // $("p").each(function() {
-        //     console.log(maxWidth);
-        //     maxWidth = Math.max(maxWidth, $(this).width());
-        // });
-        // console.log(maxWidth);
-        console.log(typeof(+$("span").css("line-height").split("px")[0]));
-        console.log(3 * $("span").css("font-size").replace(/\D/g, ""));
-        // $("p").each(function (i) {
-        //     $(this).wrap("<div id='col-" + i + "' class='col'></div>");
-        //     $(this).after("<div class='text'><span id='typed-" + i + "'></span></div>");
-        //     $(this).wrap("<div id='text-" + i + "'></div>");
-        // });
-        // $(".col").wrapAll("<div id='grid'></div>");
-
-        // var [outputIdx_1, outputIdx_2, outputIdx_3] = [0, 1, 2];
-        // var outputText = $("p").map(function () {
-        //     return $(this).html().trim();
-        // });
-        // var outputIdx = Array.from(Array(outputText.length), (e, i) => i);
         $("p").addClass("hidden");
-        // $("p").wrapAll("<div id='text'></div>");
-        // $("#text").after("<div id='grid'></div>");
         $("p").last().after("<div id='grid'></div>");
         $("#grid").wrap("<div id='wrapper'></div>");
 
         let numCols = Math.floor($("#grid").css("width").replace(/\D/g, "") / maxWidth);
         let numRows = Math.floor($("#grid").css("height").replace(/\D/g, "") / ($("p").css("line-height").replace(/\D/g, "") * 3));
-        console.log(numCols);
-        console.log(numRows);
-        console.log("Cheese"); 
 
         let gridDim = ["1fr ".repeat(numRows), "1fr ".repeat(numCols)].join("/ ");
-        console.log(gridDim);
         $("#grid").css("grid", gridDim);
-        console.log($("#grid").css("grid"));
+
 
         const cellCount = numCols * numRows;
 
-
-        // const cellCount = function (gridCSS) {
-        //     rows = gridCSS[0].trim().split(" ").length;
-        //     cols = gridCSS[1].trim().split(" ").length;
-        //     return rows * cols;
-        // }($("#grid").css("grid").split("/"));
-
         var currRow = 0;
         for (i = 1; i <= cellCount; i++) {
-            // $("#grid").append("<div class='cell'><span id='typed-" + i + "' class='typed'></span></div>");
             $("#grid").append("<div class='cell row-" + currRow + "'><span id='typed-" + i + "' class='typed'></span></div>");
             if (i % numCols === 0) {
                 currRow++;
             }
-            // $("#grid").append("<div class='cell'><div class='typer'><span id='typed-" + i + "' class='typed'></span></div></div>");
         }
-
-        // maxWidth = 0;
-        // $(".typed").each(function() {
-        //     maxWidth = Math.max(maxWidth, $(this).width());
-        // });
-        // console.log(maxWidth);
 
         var gridAnimation = `
         @keyframes scroll {
@@ -316,19 +200,12 @@
                 transform: translate(0, `+ $("#wrapper").css("height") +`);
             }
         }`;
-        // transform: translate(`+ $("#wrapper").css("width") +", "+ $("#wrapper").css("height") +`);
-
-        console.log($("#wrapper").css("width"));
-        console.log($("#grid").css("width"));
-        console.log(gridAnimation);
         
         $("<style>"+ gridAnimation + "</style>").appendTo("head");
         $("#grid").css("animation", "scroll 20s linear infinite alternate");
         
         const wrapWidth = $("#wrapper").css("width").replace(/\D/g, "");
         for (i = 0; i < numRows; i++) {
-            // var mw = $("#wrapper").css("width").replace(/\D/g, "");
-            // console.log("mw " + mw);
             const min = Math.floor(wrapWidth/4);
             const max = Math.floor(wrapWidth * 1.5);
             var w = randRange(min, max);
@@ -346,8 +223,6 @@
                 }
             }`;
             $("<style>"+ rowAnimation + "</style>").appendTo("head");
-            // var cw = "--w" + i;
-            // cRow.css(cw, w);
             cr.css("animation", "slide-r" + i + " 20s linear infinite alternate");
             cr.on('animationiteration',   
             function() {
@@ -355,93 +230,28 @@
             });
         }
 
-        // console.time("timer");
         var options = {
             strings: textStrings,
             typeSpeed: 70,
             smartBackspace: false,
             backDelay: 2000,
             loop: true,
-            onBegin: function (self) { console.log('onBegin ' + self) },
-            onComplete: function (self) { console.log('onCmplete ' + self) },
-            preStringTyped: function (pos, self) { console.log('preStringTyped ' + pos + ' ' + self); },
             onStringTyped: function (pos, self) { 
-                // console.log('onStringTyped ' + pos + ' ' + 
-                // self.typeSpeed + ' ' +
-                // self.backDelay + ' ' +
-                // self.backSpeed + ' ' +
-                // self.startDelay + ' ' 
-                // );
                 self.typeSpeed = randRange(50, 80);
                 self.backDelay = randRange(700, 3000);
                 self.backSpeed = randRange(0, 30);
                 self.startDelay = 0; 
             },
-            onTypingPaused: function (pos, self) { console.log('onTypingPaused ' + pos + ' ' + self) },
-            onTypingResumed: function (pos, self) { console.log('onTypingResumed ' + pos + ' ' + self) },
-            onReset: function (self) { console.log('onReset ' + self) },
-            onStop: function (pos, self) { console.log('onStop ' + pos + ' ' + self) },
-            onStart: function (pos, self) { console.log('onStart ' + pos + ' ' + self) },
-            onDestroy: function (self) { console.log('onDestroy ' + self) }
-            // onComplete: function (self) {
-            //     if (outputIdx[0] === outputText.length-1) {
-            //         outputIdx[0] = -1;
-            //     }
-
-            //     outputIdx[0] += 1;
-            //     self.strings[self.arrayPos] = outputText[outputIdx[0]];
-            // },
         };
-
-        // var typed_0 = new Typed("#typed-0", options);
 
         var typedArr = Array(cellCount);
         for (i = 1; i <= cellCount; i++) {
-            // options.onComplete = function (self) {
-            //     self.reset();
-            // }
-            // options.onBegin = function (self) {
-            //     // if (self.strPos === 0) {
-            //     //     self.arrayPos = Math.floor(Math.random() * (self.squence.length + 1));
-            //     // }
-            //     console.log("Begin");
-            // }
             typedArr[i] = new Typed("#typed-"+i, options);
             textStrings.sort(() => Math.random() - 0.5);
             options.typeSpeed = randRange(50, 80);
             options.backDelay = randRange(700, 3000);
             options.backSpeed = randRange(0, 30);
             options.startDelay = randRange(500, 5000);
-            console.log("Loop: " + i);
         }
-
-        console.log(typedArr);
-        console.log(typedArr[0]);
-        console.log(typedArr[1]);
-
-        // for (i = 0; i < numRows; i++) {
-        //     var w = randRange(Math.floor(wrapWidth/4), Math.floor(wrapWidth * 1.5));
-
-        //     var cr = $(".row-" + i);
-        //     $(".row-" + i).css("--w-" + i, w + "px");
-
-        //     // var cw = "--w" + i;
-        //     // cRow.css(cw, w);
-        //     cr.css("animation", "slide-r" + i + " 20s linear infinite alternate");
-        // }
-        
-
-       
-
-        // options.stringsElement = "#text-2";
-        // options.onComplete = function (self) {
-        //     if (outputIdx_3 === 2) {
-        //         outputIdx_3 = -1;
-        //     }
-
-        //     outputIdx_3 += 1;
-        //     self.strings[self.arrayPos] = outputText[outputIdx_3];
-        // }
-        // var typed_3 = new Typed("#typed-2", options);
     </script>
 </body>
