@@ -3,7 +3,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.5/typed.min.js"></script>
 
     <style>
-        @import url("https://fonts.googleapis.com/css?  family=Lora:400,400i,700,700i");
+        @import url('https://fonts.googleapis.com/css2?family=Carter+One&family=Fira+Mono&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
@@ -19,6 +20,7 @@
         }
 
         p, span {
+            font-family: 'Fira Mono';
             font-size: 16px;
             line-height: 20px;
         }
@@ -101,12 +103,12 @@
             margin-left: 4rem;
         }
 
-        svg text {
-            font-family: Lora;
+        text {
+            font-family: 'Carter One';
             letter-spacing: 10px;
-            stroke: #ffa5d8;
+            stroke: #ffffff;
             font-size: 150px;
-            font-weight: 700;
+            font-weight: 400;
             stroke-width: 3;
             
             animation: textAnimate 5s infinite alternate;
@@ -116,14 +118,14 @@
             0% {
                 stroke-dasharray: 0 50%;
                 stroke-dashoffset:  20%;
-                fill: hsl(189, 68%, 75%);
+                fill: rgb(65, 184, 131);
 
             }
             
             100% {
                 stroke-dasharray: 50% 0;
                 stroke-dashoffstet: -20%;
-                fill: hsla(189, 68%, 75%,0%);
+                fill: rgba(65, 184, 131, 0%);
             }
         }
     </style>
@@ -131,16 +133,20 @@
 
 <body>
     <p>&lt<span class="tag">h1</span>&gt Hello World! &lt/<span class="tag">h1</span>&gt</p>
-    <p>&lt<span class="tag">h1</span>&gt This is a HTML, CSS, and JS animation. &lt/<span class="tag">h1</span>&gt</p>
-    <p>&lt<span class="tag">h1</span>&gt Embedded in an SVG for your enjoyment! &lt/<span class="tag">h1</span>&gt</p>
-    <p>&lt<span class="tag">h1</span>&gt Thanks for visiting :) &lt/<span class="tag">h1</span>&gt</p>
+    <p>&lt<span class="tag">p</span>&gt This is a HTML, CSS, and JS animation. &lt/<span class="tag">p</span>&gt</p>
+    <p>&lt<span class="tag">p</span>&gt Embedded in an SVG for your enjoyment! &lt/<span class="tag">p</span>&gt</p>
+    <p>&lt<span class="tag">p</span>&gt Thanks for visiting :) &lt/<span class="tag">p</span>&gt</p>
     <p><span class="var">var</span> foo <span class="eq">=</span> <span class="string">"bar"</span>;</p>
     <p><span class="var">var</span> fooBar <span class="eq">=</span> <span class="string">"baz"</span>;</p>
+    <p><span class="var">var</span> fooRay <span class="eq">=</span> [<span class="string">"foo"</span>, <span class="string">"bar"</span>, <span class="string">"baz"</span>];</p>
+    <p><span class="element">*</span> { margin: <span class="num">0</span>; }</p>
+    <p><span class="element">*</span> { padding: <span class="num">0</span>; }</p>
+    <p><span class="element">*</span> { background-color: <span class="num">#</span><span class="hex">000</span>; }</p>
     
 
     <svg width="100%" height="100%">
         <text x="50%" y="60%" text-anchor="middle">
-            Gracias
+            Welcome!
         </text>
     </svg>
     
@@ -158,18 +164,18 @@
             return context.measureText(text).width;
         }
 
-        function getHtmlText(html){
-            // Create a new div element
-            var temp = document.createElement("div");
-            // Set the HTML content with the given value
-            temp.innerHTML = html;
-            // Retrieve the text property of the element 
-            var text = temp.textContent || temp.innerText || "";
-            // Destroy temp element
-            temp.remove();
-            // Return the text
-            return text;
-        }
+        // function getHtmlText(html){
+        //     // Create a new div element
+        //     var temp = document.createElement("div");
+        //     // Set the HTML content with the given value
+        //     temp.innerHTML = html;
+        //     // Retrieve the text property of the element 
+        //     var text = temp.textContent || temp.innerText || "";
+        //     // Destroy temp element
+        //     temp.remove();
+        //     // Return the text
+        //     return text;
+        // }
 
         function pseudoRandNum(x, min, max) {
             a = min + (max-min)/2;
@@ -182,8 +188,11 @@
         const maxRowSpeed = 2;
         const initRowPosX = 2;
 
-        var textStrings = $("p").map(function () {
-            return $(this).html().trim();
+        var textStrings = [];
+        var htmlStrings = $("p").map(function () {
+            var el = $(this);
+            textStrings.push(el.text().trim());
+            return el.html().trim();
         }).get();
 
 
@@ -193,17 +202,26 @@
             }
         );
 
-        const maxWidth = getTextWidth(getHtmlText(longestStr), style);
+        // console.log(getHtmlText(longestStr));
+
+        const maxWidth = getTextWidth(longestStr, style);
+        console.log(longestStr);
+        console.log(maxWidth);
+        
+        
 
         $("p").addClass("hidden");
         $("p").last().after("<div id='grid'></div>");
         $("#grid").wrap("<div id='background'></div>");
 
+        console.log($("#grid").css("width").replace(/\D/g, ""));
+        console.log($("#grid").css("width").replace(/\D/g, "") / maxWidth);
         let numCols = Math.floor($("#grid").css("width").replace(/\D/g, "") / maxWidth);
         let numRows = Math.floor($("#grid").css("height").replace(/\D/g, "") / ($("p").css("line-height").replace(/\D/g, "") * 3));
 
         let gridDim = ["1fr ".repeat(numRows), "1fr ".repeat(numCols)].join("/ ");
         $("#grid").css("grid", gridDim);
+        console.log(numCols);
 
 
         const cellCount = numCols * numRows;
@@ -259,7 +277,7 @@
         }
 
         var options = {
-            strings: textStrings,
+            strings: htmlStrings,
             typeSpeed: 70,
             smartBackspace: false,
             backDelay: 2000,
@@ -275,7 +293,7 @@
         var typedArr = Array(cellCount);
         for (i = 1; i <= cellCount; i++) {
             typedArr[i] = new Typed("#typed-"+i, options);
-            textStrings.sort(() => Math.random() - 0.5);
+            htmlStrings.sort(() => Math.random() - 0.5);
             options.typeSpeed = randRange(50, 80);
             options.backDelay = randRange(700, 3000);
             options.backSpeed = randRange(0, 30);
