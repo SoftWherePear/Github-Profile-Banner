@@ -188,18 +188,8 @@
                     var cr = $(".row-" + i);
                     cr.css("--w", w + "px");
 
-                    var rowAnimation = `
-                    @keyframes slide-r` + i + `{
-                        0% {
-                            transform: translate(0, 0);
-                        }
-                        100% {
-                            transform: translate(var(--w), 0);
-                        }
-                    }`;
-                    $("<style>" + rowAnimation + "</style>").appendTo("head");
                     cr.css({
-                        animation: "slide-r" + i + " " + animationLength + "s linear infinite",
+                        animation: "slide " + animationLength + "s linear infinite",
                         transform: "translateX(" + randRange(-maxWidth / initRowPosX, maxWidth / initRowPosX) + "px)"
                     });
                     cr.on('animationiteration',
@@ -207,6 +197,17 @@
                             $(this).css("--w", pseudoRandNum($(this).css("--w").replace(/px/g, ""), min, max) + "px");
                         });
                 }
+
+                var rowAnimation = `
+                    @keyframes slide {
+                        0% {
+                            transform: translate(0, 0);
+                        }
+                        100% {
+                            transform: translate(var(--w), 0);
+                        }
+                    }`;
+                $("<style>" + rowAnimation + "</style>").appendTo("#head");
 
                 var options = {
                     strings: htmlStrings,
