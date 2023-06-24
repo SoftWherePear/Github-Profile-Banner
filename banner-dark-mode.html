@@ -150,8 +150,8 @@
                 $("p").last().after("<div id='grid'></div>");
                 $("#grid").wrap("<div id='background'></div>");
 
-                let numCols = Math.floor($("#grid").css("width").replace(/\D/g, "") / maxWidth);
-                let numRows = Math.floor($("#grid").css("height").replace(/\D/g, "") / ($("p").css("line-height").replace(/\D/g, "") * 3));
+                let numCols = Math.floor($("#grid").css("width").replace(/px/g, "") / maxWidth);
+                let numRows = Math.floor($("#grid").css("height").replace(/px/g, "") / ($("p").css("line-height").replace(/px/g, "") * 3));
 
                 let gridDim = ["1fr ".repeat(numRows), "1fr ".repeat(numCols)].join("/ ");
                 $("#grid").css("grid", gridDim);
@@ -179,7 +179,7 @@
                 $("<style>"+ gridAnimation + "</style>").appendTo("#head");
                 $("#grid").css("animation", "scroll "+ animationLength +"s linear infinite");
                 
-                const backgroundWidth = $("#background").css("width").replace(/\D/g, "");
+                const backgroundWidth = $("#background").css("width").replace(/px/g, "");
                 for (i = 0; i < numRows; i++) {
                     const min = Math.floor(backgroundWidth / minRowSpeed);
                     const max = Math.floor(backgroundWidth * maxRowSpeed);
@@ -204,7 +204,7 @@
                     });
                     cr.on('animationiteration',
                         function () {
-                            $(this).css("--w", pseudoRandNum($(this).css("--w").replace(/\D/g, ""), min, max) + "px");
+                            $(this).css("--w", pseudoRandNum($(this).css("--w").replace(/px/g, ""), min, max) + "px");
                         });
                 }
 
