@@ -1,7 +1,7 @@
 # Github-Profile-Banner
 This is the source code for my welcome banner that I have embedded as an SVG on my profile. Enjoy :)
 
-Banner-light-mode-JS.html is a version of the animation that uses JS. but I learned that JS doesn't run if you embed SVG's as an image. Code there is a little messy because I stopped work on it 😖
+Banner-light-mode-JS.html is a version of the animation that uses JS, but I learned that JS doesn't run if you embed SVG's as an image. Code there is a little messy because I stopped work on it 😖
 
 # Skills Demonstrated
 1. HTML Layout and Structuring
