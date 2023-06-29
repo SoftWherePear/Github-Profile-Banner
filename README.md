@@ -8,6 +8,10 @@ This is the source code for my welcome banner that I have embedded as an SVG on 
 4. CSS Styling
 5. CSS Variables
 
+# Resources
+1. [Dark Theme Color Palette](https://www.figma.com/community/file/1137445418485757476/Atom-One-Dark-Color-Palette)
+2. [Light Theme Color Palette](https://www.figma.com/community/file/1137445644743557669/Atom-One-Light-Color-Palette)
+
 # Refrences 
 1. [David Wells - Advanced Markdown Guide (Github.md)](https://github.com/DavidWells/advanced-markdown/blob/master/README.md)
 2. [Kevin Powell - Customizable Typewriter Effect (Youtube)](https://www.youtube.com/watch?v=w1nhwUGsG6M&ab_channel=KevinPowell)
