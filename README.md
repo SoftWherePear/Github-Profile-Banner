@@ -4,7 +4,7 @@ This is the source code for my welcome banner that I have embedded as an SVG on 
 # Skills Demonstrated
 1. HTML Layout and Structuring
 2. Advanced CSS Animations
-3. SVG Embbedding
+3. SVG Embedding
 4. CSS Styling
 5. CSS Variables
 
