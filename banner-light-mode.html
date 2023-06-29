@@ -2,6 +2,7 @@
   <foreignObject width="100%" height="100%">
     <div xmlns="http://www.w3.org/1999/xhtml">
       <style>
+        /* General Styling */
         :root {
           --bg-color: #ffffff;
           --animation-length: 30s;
@@ -12,6 +13,7 @@
           padding: 0;
         }
 
+        /* Container Styling */
         #background {
           overflow: hidden;
           position: relative;
@@ -34,12 +36,14 @@
           animation: grid-scroll var(--animation-length) linear infinite;
         }
 
+        /* Grid Cell Styling */
         ul {
           height: 1.25rem;
           overflow: hidden;
           place-self: center stretch;
         }
 
+        /* Rotating Text Animation Styling */
         li {
           list-style: none;
           position: relative;
@@ -47,6 +51,7 @@
           animation: text-scroll var(--duration) steps(3) infinite;
         }
         
+        /* Typewriter Animation Styling */
         p {
           color: #383A42;
           font-size: 1rem;
@@ -82,6 +87,7 @@
             blink 750ms steps(var(--chars)) infinite;
         }
 
+        /* Row Sliding Animation Styling */
         .row-1 {
           --speed: 800px;
           --offset: 2rem;
@@ -117,6 +123,7 @@
           animation: slide var(--animation-length) linear infinite;
         }
 
+        /* Text Theme Styling */
         .var {
           color: #a626a4;
         }
@@ -144,6 +151,7 @@
           color: #50a14f;
         }
         
+        /* Animations */
         @keyframes typewriter {
           0%, 5% {
             left: 0%;
@@ -499,33 +507,34 @@
     </div>
   </foreignObject>
   <style>
-      text {
-          font-family: 'Carter One', cursive;
-          letter-spacing: 10px;
-          stroke: #000;
-          font-size: 9rem;
-          font-weight: 800;
-          stroke-width: 3;
-          
-          animation: textAnimate 5s infinite alternate;
-      }
-      
-      @keyframes textAnimate {
-          0%, 40%{
-              stroke-dasharray: 50% 0;
-              stroke-dashoffstet: -20%;
-              fill: transparent;
+    /* Welcome Text Styling */
+    text {
+        font-family: 'Carter One', cursive;
+        letter-spacing: 10px;
+        stroke: #000;
+        font-size: 9rem;
+        font-weight: 800;
+        stroke-width: 3;
+        
+        animation: textAnimate 5s infinite alternate;
+    }
+    
+    @keyframes textAnimate {
+        0%, 40%{
+            stroke-dasharray: 50% 0;
+            stroke-dashoffstet: -20%;
+            fill: transparent;
 
-          }
+        }
 
-          
-          80%, 100% {
-              stroke-dasharray: 0 50%;
-              stroke-dashoffset:  20%;
-              fill: rgb(65, 184, 131);
-              
-          }
-      }
+        
+        80%, 100% {
+            stroke-dasharray: 0 50%;
+            stroke-dashoffset:  20%;
+            fill: rgb(65, 184, 131);
+            
+        }
+    }
   </style>
   <text x="50%" y="50%" text-anchor="middle" dominant-baseline = "central">Welcome!</text>
 </svg>

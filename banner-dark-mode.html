@@ -2,6 +2,7 @@
   <foreignObject width="100%" height="100%">
     <div xmlns="http://www.w3.org/1999/xhtml">
       <style>
+        /* General Styling */
         :root {
           --bg-color: #0D1117;
           --animation-length: 30s;
@@ -12,6 +13,7 @@
           padding: 0;
         }
 
+        /* Container Styling */
         #background {
           overflow: hidden;
           position: relative;
@@ -35,12 +37,14 @@
           animation: grid-scroll var(--animation-length) linear infinite;
         }
 
+        /* Grid Cell Styling */
         ul {
           height: 1.25rem;
           overflow: hidden;
           place-self: center stretch;
         }
 
+        /* Rotating Text Animation Styling */
         li {
           list-style: none;
           position: relative;
@@ -48,6 +52,7 @@
           animation: text-scroll var(--duration) steps(3) infinite;
         }
         
+        /* Typewriter Animation Styling */
         p {
           color: #CCCCCC;
           font-size: 1rem;
@@ -90,6 +95,7 @@
           animation: slide var(--animation-length) linear infinite;
         }
 
+        /* Row Sliding Animation Styling */
         .row-2 {
           --speed: 700px;
           --offset: -2rem;
@@ -118,6 +124,7 @@
           animation: slide var(--animation-length) linear infinite;
         }
 
+        /* Text Theme Styling */
         .var {
           color: #c678dd;
         }
@@ -145,6 +152,7 @@
             color: #98c379;
         }
         
+        /* Animations */
         @keyframes typewriter {
           0%, 5% {
             left: 0%;
@@ -176,13 +184,13 @@
           100% {
               transform: translateX(var(--speed));
           }
-       }
-
-       @keyframes grid-scroll {
-        100% {
-          transform: translate(0, 150px);
         }
-      }
+
+        @keyframes grid-scroll {
+          100% {
+            transform: translate(0, 150px);
+          }
+        }
       </style>
       <div id="background">
         <div id="grid">
@@ -498,6 +506,7 @@
         </div>
       </div>
       <style>
+        /* Welcome Text Styling */
         h1 {
           font-family: "Source Code Pro", monospace;
           position: relative;
